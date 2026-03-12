@@ -23,7 +23,8 @@ class SecurityManager:
             "GEMINI_API_KEY": self.get_secret("GEMINI_API_KEY"),
             "AGENT_PRIVATE_KEY": self.get_secret("AGENT_PRIVATE_KEY"),
             "MOLTBOOK_API_KEY": self.get_secret("MOLTBOOK_API_KEY"),
-            "CLAUDE_API_KEY": self.get_secret("CLAUDE_API_KEY")
+            "CLAUDE_API_KEY": self.get_secret("CLAUDE_API_KEY"),
+            "EMAIL_PASSWORD": self.get_secret("EMAIL_PASSWORD")
         }
         return secrets
 
