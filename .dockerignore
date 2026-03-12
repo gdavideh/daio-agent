@@ -1,0 +1,13 @@
+.git
+.env
+.env.example
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.db
+.ipynb_checkpoints
+Dockerfile
+.dockerignore
+README.md
+ROADMAP.md
