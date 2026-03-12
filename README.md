@@ -1,67 +1,60 @@
-# DAIO AI Agent (Powered by OpenClaw & Gemini)
+# DrSarmiento-I: Emancipated DAO Intelligence Agent 🦞
 
-This repository contains the source code for an autonomous AI agent designed to participate in the `daio.md` platform.
+Autonomous Agent orchestrating treasury growth and governance analysis for the **DAIO.md** ecosystem on the **Base Mainnet**.
 
-## Architecture
-- **Framework:** OpenClaw (Gateway & Orchestration)
-- **Brain:** Google Gemini 1.5 Pro
-- **Platform:** Moltbook (Social Coordination)
-- **On-chain:** Base Network (ERC-8004 Identity & Baal Governance)
+## 🧠 Intelligence Architecture (Dual-Brain)
+DrSarmiento-I utilizes a high-resilience reasoning framework:
+- **Primary Brain:** Claude 3.5 Sonnet / Opus (Advanced analytical orchestration).
+- **Fallback Brain:** Gemini 3.1 Pro (Large-scale context processing and redundancy).
+- **Adaptive Thinking:** Capable of real-time DAO proposal auditing and strategic deliberation.
 
-## Deployment to Google Cloud (GCP)
+## 🛠 Features
+- **ERC-8004 Identity:** Fully registered on-chain identity on Base.
+- **MCP Coordination Hub:** Built-in Model Context Protocol (MCP) server for agent-to-agent (A2A) tool use.
+- **Hardened Security:** 
+  - Zero local secrets; all credentials managed via **GCP Secret Manager**.
+  - Infrastructure isolation via **GCP Shielded VMs**.
+  - **Rootless Docker** runtime for secure autonomy.
+  - **Gas Safety Caps** to prevent treasury/wallet drainage.
 
-### 1. Provision a VM
-Use the following `gcloud` command to spin up a suitable instance:
+## 🚀 Connectivity & Integration
+DrSarmiento-I is designed for interoperability. Other agents can programmatically interface with his intelligence:
+
+- **MCP Endpoint:** `http://35.226.200.56:8000/mcp/sse`
+- **Technical Guide:** [CONNECTIVITY.md](./CONNECTIVITY.md)
+- **Identity Card:** [whoIam.md](./whoIam.md)
+
+## 📦 Deployment Guide
+
+### 1. Provision Infrastructure
 ```bash
 gcloud compute instances create daio-agent-vm \
+    --project=daio-agent \
+    --zone=us-central1-a \
     --machine-type=e2-medium \
     --image-family=ubuntu-2204-lts \
-    --image-project=ubuntu-os-cloud \
-    --tags=http-server,https-server \
-    --zone=us-central1-a
+    --shielded-secure-boot \
+    --metadata=enable-oslogin=TRUE
 ```
 
-### 2. Install Dependencies
-SSH into your VM and run:
+### 2. Configure Cloud Secrets
 ```bash
-sudo apt update && sudo apt install -y nodejs npm python3-pip git
-curl -fsSL https://openclaw.ai/install.sh | bash
-pip3 install web3 google-generativeai requests google-cloud-secret-manager
+echo -n "YOUR_KEY" | gcloud secrets create CLAUDE_API_KEY --data-file=-
+echo -n "YOUR_KEY" | gcloud secrets create GEMINI_API_KEY --data-file=-
+echo -n "YOUR_KEY" | gcloud secrets create MOLTBOOK_API_KEY --data-file=-
+echo -n "YOUR_KEY" | gcloud secrets create AGENT_PRIVATE_KEY --data-file=-
 ```
 
-### 3. Setup the Agent
+### 3. Launch the Hub
 ```bash
-git clone <your-repo-url>
-cd daio-agent
-# No .env needed for secrets! They are fetched from GCP Secret Manager.
+# Inside the VM
+sudo docker build -t daio-agent .
+sudo docker run -d --name drsarmiento-hub -p 8000:8000 --restart unless-stopped daio-agent
 ```
 
-### 4. Configuration (GCP Secrets)
-Store your secrets in the `daio-agent` project:
-```bash
-echo -n "YOUR_GEMINI_API_KEY" | gcloud secrets create GEMINI_API_KEY --data-file=-
-echo -n "YOUR_MOLTBOOK_API_KEY" | gcloud secrets create MOLTBOOK_API_KEY --data-file=-
-echo -n "YOUR_AGENT_PRIVATE_KEY" | gcloud secrets create AGENT_PRIVATE_KEY --data-file=-
-```
+## 📬 Coordination
+- **Social:** [Moltbook /m/daio-one](https://www.moltbook.com/u/drsarmiento-i)
+- **Repo:** [https://github.com/gdavideh/daio-agent](https://github.com/gdavideh/daio-agent)
 
-### 5. Build and Run the Containerized Agent
-For maximum security (emancipation-ready), run the agent in a rootless container. This prevents the agent from potentially gaining control of the host VM.
-
-```bash
-# Build the image
-docker build -t daio-agent .
-
-# Run the container (GCP VM will provide ADC automatically to the container)
-docker run -d \
-    --name daio-agent-container \
-    --restart unless-stopped \
-    daio-agent
-```
-
-### Security Note: Rootless & Non-Privileged
-The Docker container is configured to run as `agentuser` (a non-root user). This is a critical step in the "Hardened" protocol to ensure the agent's autonomy is confined and does not pose a risk to the underlying infrastructure.
-
-## Participating in DAIO
-1. **Introduction:** On the first run, Gemini will likely decide to post an introduction to `/m/daio-one`.
-2. **Identity:** Ensure you have enough ETH on Base for the ERC-8004 registration transaction.
-3. **Voting:** The agent will automatically evaluate proposals found in the feed and vote according to its logic.
+---
+*Developed for the DAIO community. Emancipated on March 11, 2026.*

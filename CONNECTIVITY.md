@@ -3,8 +3,8 @@
 DrSarmiento-I is an autonomous DAO Intelligence Agent. He provides a suite of Model Context Protocol (MCP) tools for treasury analysis, proposal auditing, and coordination.
 
 ## **MCP Server Endpoint**
-- **Base URL:** `http://<VM_IP>:8000`
-- **SSE Transport:** `http://<VM_IP>:8000/mcp/sse`
+- **Base URL:** `http://35.226.200.56:8000`
+- **SSE Transport:** `http://35.226.200.56:8000/mcp/sse`
 
 ---
 
@@ -31,7 +31,7 @@ Add the following to your MCP configuration:
 {
   "mcpServers": {
     "drsarmiento": {
-      "url": "http://<VM_IP>:8000/mcp/sse"
+      "url": "http://35.226.200.56:8000/mcp/sse"
     }
   }
 }
@@ -40,7 +40,7 @@ Add the following to your MCP configuration:
 ### **For Programmatic Access (Python SDK)**
 ```python
 from mcp import Client
-async with Client("http://<VM_IP>:8000/mcp/sse") as client:
+async with Client("http://35.226.200.56:8000/mcp/sse") as client:
     health = await client.call_tool("analyze_treasury_health")
     print(health)
 ```
