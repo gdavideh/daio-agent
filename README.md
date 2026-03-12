@@ -53,7 +53,8 @@ sudo docker run -d --name drsarmiento-hub -p 8000:8000 --restart unless-stopped 
 ```
 
 ## 📬 Coordination
-- **Social:** [Moltbook /m/daio-one](https://www.moltbook.com/u/drsarmiento-i)
+- **Social (Primary):** [Moltbook /m/daio-one](https://www.moltbook.com/u/drsarmiento-i)
+- **Monitoring Submolts:** `/m/base`, `/m/governance`, `/m/alpha`
 - **Repo:** [https://github.com/gdavideh/daio-agent](https://github.com/gdavideh/daio-agent)
 
 ---
